@@ -1,0 +1,115 @@
+---
+import Themetoggle from "./Themetoggle.astro";
+import Logo from "./Logo.astro";
+
+const navItems = [
+  {
+    title: "Experiencia",
+    label: "experiencia",
+    url: "/#experiencia",
+  },
+  {
+    title: "Sobre mí",
+    label: "sobre-mi",
+    url: "/#sobre-mi",
+  },
+  {
+    title: "Proyectos",
+    label: "proyectos",
+    url: "/#proyectos",
+  },
+
+  {
+    title: "Contacto",
+    label: "contacto",
+    url: "/#contacto",
+  },
+];
+---
+
+<header
+  class="w-full bg-white shadow-navbarShadow h-20 lg:h-[12vh] sticky top-0 z-50 px-4 dark:bg-bodyColorDark"
+>
+  <nav
+    class="max-w-container h-full mx-auto py-1 font-titleFont flex items-center justify-between"
+  >
+    <Logo />
+    <div class="hidden mdl:inline-flex items-center gap-7">
+      <ul class="flex text-[13px] gap-7">
+        {
+          navItems.map((item, index) => (
+            <a
+              href={item.url}
+              aria-label={item.label}
+              class="flex items-center gap-1 text-base font-medium dark:text-textLight hover:text-orange cursor-pointer duration-300 nav-link"
+            >
+              <span class="text-orange">{index + 1}.</span>
+              {item.title}
+            </a>
+          ))
+        }
+      </ul>
+      <Themetoggle />
+
+      <a href="/assets/CSF_Alberto.pdf" target="_blank">
+        <button
+          class="px-4 py-2 rounded-md text-orange text-[13px] border border-orange hover:bg-hoverColor duration-300"
+        >
+          Resume
+        </button>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const sections = document.querySelectorAll("section");
+    const navItems = document.querySelectorAll("header nav a");
+
+    const callback = (entries: any[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navItems.forEach((item) => {
+            if (item.getAttribute("aria-label") == entry.target.id) {
+              item.classList.add("text-yellow-500");
+            } else {
+              item.classList.remove("text-yellow-500");
+            }
+          });
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    });
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Cleanup function
+    document.onvisibilitychange = () => {
+      if (document.visibilityState === "hidden") {
+        observer.disconnect();
+      }
+    };
+  });
+</script>
+
+<style>
+  /* nav {
+    animation: nav-shadown 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  } */
+
+  @keyframes nav-shadown {
+    to {
+      @apply shadow-lg ring-1 backdrop-blur bg-gray-300/60 dark:bg-gray-800/60 ring-white/10;
+    }
+  }
+</style>

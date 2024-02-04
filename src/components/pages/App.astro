@@ -1,0 +1,43 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "../Header.astro";
+import LeftSide from "../LeftSide.astro";
+import RightSide from "../RightSide.astro";
+import Banner from "../Banner.astro";
+import SectionContainer from "../SectionContainer.astro";
+---
+
+<Layout title="TEST" description="TESt">
+  <main
+    class="font-bodyFont w-full bg-bodyColorLight h-screen overflow-x-hidden overflow-y-scroll text-black dark:text-white dark:bg-bodyColorDark"
+  >
+    <div class="w-full h-[88vh] xl:flex items-center gap-20 justify-between">
+      <!-- <div class="hidden xl:inline-flex w-32 h-full fixed left-0 bottom-0">
+        <LeftSide />
+      </div> -->
+      <div class="h-[88vh] w-full mx-auto p-4">
+        <SectionContainer
+          id="experiencia"
+          class="max-w-contentContainer mx-auto py-10 mdl:py-24 flex flex-col gap-4 lgl:gap-8 mdl:px-10 xl:px-4"
+        >
+          <Banner />
+        </SectionContainer>
+        <SectionContainer
+          id="proyectos"
+          class="max-w-contentContainer mx-auto py-10 mdl:py-24 flex flex-col gap-4 lgl:gap-8 mdl:px-10 xl:px-4"
+        >
+          fdsfsdjfñlks
+        </SectionContainer>
+        <SectionContainer
+          id="sdfs"
+          class="max-w-contentContainer mx-auto py-10 mdl:py-24 flex flex-col gap-4 lgl:gap-8 mdl:px-10 xl:px-4"
+        >
+          <Banner />
+        </SectionContainer>
+      </div>
+      <!-- <div class="hidden xl:inline-flex w-32 h-full fixed right-0 bottom-0">
+        <RightSide />
+      </div> -->
+    </div>
+  </main>
+</Layout>
